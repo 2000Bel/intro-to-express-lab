@@ -2,14 +2,14 @@
  const app = express();
  const port = 3000;
 
- // Rout 1: http://localhost:3000/greetings?username=Bel
- app.get('/greetings', (req,res) => {
+ // Rout 1: http://localhost:3000/greetings/Bel
+ app.get('/greetings/:username', (req,res) => {
     const username = req.query.username;
     res.send(`<h1>Hello there, ${username}!</h1>`);
  });
 
- //Rout 2: http://localhost:3000/roll?number=20
- app.get('/roll', (req,res) => {
+ //Rout 2: http://localhost:3000/roll/20
+ app.get('/roll/:number', (req,res) => {
     const number = parseInt(req.query.number);
     if(isNaN(number)){
     return res.send("You most especify a number");
@@ -19,14 +19,14 @@
 });
 
  
- //Rout 3: http://localhost:3000/collectibles?index=1
+ //Rout 3: http://localhost:3000/collectibles/1
    const collectibles = [
     { name: 'shiny ball', price: 5.95 },
     { name: 'autographed picture of a dog', price: 10 },
     { name: 'vintage 1970s yogurt SOLD AS-IS', price: 0.99 }
   ];
 
-  app.get('/collectibles', (req,res) => {
+  app.get('/collectibles/:index', (req,res) => {
     const index = parseInt(req.query.index);
     if(isNaN(index) || index < 0 || index >= collectibles.length){
       res.send("This item is not yet in stock.check back soon!");
